@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SpotifyLogin from "react-spotify-login";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 class Login extends Component {
@@ -12,25 +11,8 @@ class Login extends Component {
     };
   }
 
-  //   handleLogin = () => {
-  //     axios({
-  //       method: "get",
-  //       url: "http://localhost:5000/",
-  //     })
-  //       .then((res) => {
-  //         console.log(res);
-  //         this.setState({
-  //           logincomp: res.data + "&output=embed",
-  //         });
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
-  componentDidMount = () => {
-    // console.log(this.props);
-  };
   success = (res) => {
-    console.log("Succesful");
+    console.log("Succesfull login");
     this.setState({
       accessToken: res.access_token,
       login: true,
@@ -48,18 +30,12 @@ class Login extends Component {
     return (
       <div>
         <h1>Hello from Login</h1>
-        {/* <a
-          href={`https://accounts.spotify.com/authorize?client_id=7aa34fa0b4f94421ab2a34bf21a34e9b&response_type=code&redirect_uri=${redirect}&scope=user-read-private%20user-read-email&state=34fFs29kd09`}
-        >
-          Login with spotify
-        </a> */}
         <SpotifyLogin
-          clientId="7aa34fa0b4f94421ab2a34bf21a34e9b"
+          clientId={process.env.REACT_APP_CLIENT_ID}
           redirectUri="http://localhost:3000/login"
           onSuccess={this.success}
           onFailure={this.failure}
           scope={("user-read-private", "streaming")}
-          show_dialog={true}
         />
       </div>
     );

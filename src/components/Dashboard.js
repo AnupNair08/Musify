@@ -49,7 +49,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Welcome {this.state.user}</h1>
-        <img src={this.state.profile}></img>
+        <img alt="User" src={this.state.profile}></img>
         <button onClick={this.handleLogout}>Logout</button>
       </div>
     );
