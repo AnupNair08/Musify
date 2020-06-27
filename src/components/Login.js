@@ -35,7 +35,7 @@ class Login extends Component {
           redirectUri="http://localhost:3000/login"
           onSuccess={this.success}
           onFailure={this.failure}
-          scope={("user-read-private", "streaming")}
+          scope={("user-read-private", "streaming", "user-top-read")}
         />
       </div>
     );

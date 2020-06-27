@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Artists from "./Artists";
+import { Navbar, Nav } from "react-bootstrap";
+import Player from "./Player";
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +19,7 @@ class Dashboard extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: "https://api.spotify.com/v1/me",
+      url: "https://api.spotify.com/v1/me/",
       headers: {
         Authorization: "Bearer " + accessToken,
       },
@@ -26,7 +30,6 @@ class Dashboard extends Component {
           user: res.data.display_name,
           profile: res.data.images[0].url,
         });
-        console.log(this.state.profile);
       })
       .catch((err) => console.log(err));
   };
@@ -48,9 +51,31 @@ class Dashboard extends Component {
     }
     return (
       <div>
+        <Navbar bg="dark" variant="dark" sticky>
+          <Navbar.Brand href="#home">Musify</Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">
+              {" "}
+              <button onClick={this.handleLogout}>Logout</button>
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <Nav.Link href="#">
+              <img
+                src={this.state.profile}
+                alt="user"
+                height="40px"
+                width="40px"
+                className="rounded-circle"
+              ></img>
+            </Nav.Link>
+          </Nav>
+        </Navbar>
         <h1>Welcome {this.state.user}</h1>
-        <img alt="User" src={this.state.profile}></img>
-        <button onClick={this.handleLogout}>Logout</button>
+        <Artists></Artists>
+        <Player></Player>
       </div>
     );
   }

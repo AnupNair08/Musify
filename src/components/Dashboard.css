@@ -1,0 +1,8 @@
+.hscroll {
+  display: flex;
+  overflow-x: auto;
+}
+
+.hscroll::-webkit-scrollbar {
+  display: none;
+}

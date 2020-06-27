@@ -2,12 +2,19 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const fetch = require("node-fetch");
-router.get("/", async (req, res) => {
-  let result = await fetch(
-    "https://accounts.spotify.com/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09"
-  );
-  console.log(result.url);
-  res.send(result.url);
+router.get("/artists", async (req, res) => {
+  const accessToken = req.query.accessToken;
+  console.log(accessToken);
+  const headers = {
+    Authorization: "Bearer " + accessToken,
+  };
+  let result = await fetch("https://api.spotify.com/v1/me/top/artists", {
+    method: "GET",
+    headers: headers,
+  });
+  console.log(result);
+  const f = await result.json();
+  res.json(f);
 });
 
 module.exports = router;
