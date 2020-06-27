@@ -35,4 +35,24 @@ router.get("/tracks", async (req, res) => {
   res.json(f);
 });
 
+router.get("/search", async (req, res) => {
+  const q = req.query.q;
+  const accessToken = req.query.accessToken;
+  const type = req.query.type;
+
+  console.log(req.query);
+  const headers = {
+    Authorization: "Bearer " + accessToken,
+  };
+  let result = await fetch(
+    `https://api.spotify.com/v1/search?q=${q}&type=${type}`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+  const f = await result.json();
+  res.json(f);
+});
+
 module.exports = router;

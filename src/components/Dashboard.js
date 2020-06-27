@@ -12,6 +12,7 @@ class Dashboard extends Component {
     this.state = {
       token: this.props.accessToken,
       user: "",
+      browse: false,
     };
   }
 
@@ -44,6 +45,12 @@ class Dashboard extends Component {
     });
   };
 
+  browse = () => {
+    this.setState({
+      browse: true,
+    });
+  };
+
   render() {
     const status = sessionStorage.getItem("login");
     if (status === "false") {
@@ -51,10 +58,13 @@ class Dashboard extends Component {
     }
     return (
       <div>
+        {this.state.browse && (
+          <Redirect to="/browse" from="/dashboard"></Redirect>
+        )}
         <Navbar bg="dark" variant="dark" sticky>
-          <Navbar.Brand href="#home">Musify</Navbar.Brand>
+          <Navbar.Brand>Musify</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link onClick={this.browse}>Browse</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
           </Nav>
 

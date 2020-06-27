@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import Login from "./components/Login";
-import { Route, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import Browse from "./components/Browse";
+import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
       <div className="App">
         <Route exact path="/dashboard" component={Dashboard}></Route>
         <Route exact path="/login" component={Login}></Route>
+        <Route exact path="/browse" component={Browse}></Route>
 
         {/* <Login></Login> */}
         {this.props.login && <Redirect to="/dashboard"></Redirect>}
