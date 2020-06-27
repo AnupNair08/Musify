@@ -17,4 +17,22 @@ router.get("/artists", async (req, res) => {
   res.json(f);
 });
 
+router.get("/tracks", async (req, res) => {
+  const accessToken = req.query.accessToken;
+  const artistId = req.query.artistId;
+  console.log(artistId);
+  const headers = {
+    Authorization: "Bearer " + accessToken,
+  };
+  let result = await fetch(
+    `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=IN`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+  const f = await result.json();
+  res.json(f);
+});
+
 module.exports = router;

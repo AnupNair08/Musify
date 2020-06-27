@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Artists from "./Artists";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Player from "./Player";
 
 class Dashboard extends Component {
@@ -56,21 +56,26 @@ class Dashboard extends Component {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">
-              {" "}
-              <button onClick={this.handleLogout}>Logout</button>
-            </Nav.Link>
           </Nav>
+
           <Nav className="ml-auto">
-            <Nav.Link href="#">
-              <img
-                src={this.state.profile}
-                alt="user"
-                height="40px"
-                width="40px"
-                className="rounded-circle"
-              ></img>
-            </Nav.Link>
+            <NavDropdown
+              drop={"left"}
+              title="Me"
+              id="dropdown-variants-secondary"
+            >
+              <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">
+                <Nav.Item onClick={this.handleLogout}>Logout</Nav.Item>
+              </NavDropdown.Item>
+            </NavDropdown>
+            <img
+              src={this.state.profile}
+              alt="user"
+              height="40px"
+              width="40px"
+              className="rounded-circle"
+            ></img>
           </Nav>
         </Navbar>
         <h1>Welcome {this.state.user}</h1>

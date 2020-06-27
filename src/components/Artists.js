@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Image } from "react-bootstrap";
+import { Image, Modal, Button } from "react-bootstrap";
 import "./Dashboard.css";
 import "./Artists.css";
 
@@ -11,6 +11,9 @@ class Artists extends Component {
 
     this.state = {
       data: [],
+      show: false,
+      cur: {},
+      tracks: [],
     };
   }
 
@@ -30,6 +33,35 @@ class Artists extends Component {
     // this.getArtisits();
   };
 
+  gettracks = (id) => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    axios({
+      method: "get",
+      url: `http://localhost:5000/tracks/?accessToken=${accessToken}&artistId=${id}`,
+    })
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          tracks: res.data.tracks,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  toggle = (artist) => {
+    if (this.state.show === false) {
+      this.setState({
+        show: true,
+        cur: artist,
+      });
+      console.log(artist);
+    } else {
+      this.setState({
+        show: false,
+      });
+    }
+  };
+
   render() {
     const artists = this.state.data.map((val, key) => {
       const ele = (
@@ -38,6 +70,10 @@ class Artists extends Component {
             src={val.images[0].url}
             className="artist"
             alt={val.name}
+            onClick={() => {
+              this.gettracks(val.id);
+              this.toggle(val);
+            }}
           ></Image>
           <h3>{val.name}</h3>
         </div>
@@ -49,6 +85,44 @@ class Artists extends Component {
       <div>
         <h1>Artists</h1>
         <div className="hscroll">{artists}</div>
+        <div>
+          <Modal show={this.state.show} onHide={this.toggle}>
+            <Modal.Header closeButton>
+              <Modal.Title>{this.state.cur.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {this.state.show && (
+                <div>
+                  <Image
+                    src={this.state.cur.images[0].url}
+                    height="300px"
+                    width="300px"
+                    className="rounded mx-auto d-block mb-5 justify-content-center align-items-center"
+                  ></Image>
+                  {this.state.tracks.map((val, key) => {
+                    return (
+                      <div key={key} className="d-flex col mb-3">
+                        <img
+                          src={val.album.images[0].url}
+                          height="60px"
+                          width="60px"
+                          className="rounded-circle"
+                          alt={val.name}
+                        ></img>
+                        <h5>{val.name}</h5>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.toggle}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
       </div>
     );
   }
