@@ -70,4 +70,21 @@ router.get("/albumtrack", async (req, res) => {
   res.json(f);
 });
 
+router.get("/featured", async (req, res) => {
+  const accessToken = req.query.accessToken;
+  console.log(req.query);
+  const headers = {
+    Authorization: "Bearer " + accessToken,
+  };
+  let result = await fetch(
+    `https://api.spotify.com/v1/browse/featured-playlists`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+  const f = await result.json();
+  res.json(f);
+});
+
 module.exports = router;

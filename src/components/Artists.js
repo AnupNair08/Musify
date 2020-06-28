@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Image, Modal, Button } from "react-bootstrap";
@@ -62,6 +63,17 @@ class Artists extends Component {
     }
   };
 
+  play = (url) => {
+    if (!url) return;
+    const ele = (
+      <div>
+        <audio controls src={url}></audio>
+      </div>
+    );
+    this.toggle();
+    ReactDOM.render(ele, document.getElementById("player"));
+  };
+
   render() {
     const artists = this.state.data.map((val, key) => {
       const ele = (
@@ -101,7 +113,11 @@ class Artists extends Component {
                   ></Image>
                   {this.state.tracks.map((val, key) => {
                     return (
-                      <div key={key} className="d-flex col mb-3">
+                      <div
+                        key={key}
+                        className="d-flex col mb-3"
+                        onClick={() => this.play(val.preview_url)}
+                      >
                         <img
                           src={val.album.images[0].url}
                           height="60px"
@@ -122,6 +138,7 @@ class Artists extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
+          <div id="player"></div>
         </div>
       </div>
     );

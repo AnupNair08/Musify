@@ -20,7 +20,7 @@ class Browse extends Component {
     this.state = {
       query: "",
       results: {},
-      type: "",
+      type: "album",
       browse: true,
       tracks: {},
     };
@@ -77,7 +77,7 @@ class Browse extends Component {
         console.log(res);
         const data = res.data.items.map((val, key) => {
           const ele = (
-            <div key={key}>
+            <div key={key} className="d-flex col">
               <Image src={art} height="300px" width="300px"></Image>
               <audio controls src={val.preview_url}></audio>
               <h5>{val.name}</h5>
