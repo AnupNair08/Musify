@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   InputGroup,
   FormControl,
@@ -7,14 +8,17 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+import Recommender from "./Recommender";
 
-export default class Browse extends Component {
+class Browse extends Component {
   constructor(props) {
     super(props);
     this.state = {
       query: "",
       results: {},
       type: "",
+      browse: true,
     };
   }
 
@@ -25,12 +29,6 @@ export default class Browse extends Component {
   };
 
   handleSearch = (e) => {
-    // if (e) {
-    //   console.log(e.target.value);
-    //   this.setState({
-    //     query: e.target.value,
-    //   });
-    // }
     axios({
       method: "get",
       url: `http://localhost:5000/search/?q=${
@@ -44,6 +42,11 @@ export default class Browse extends Component {
         this.setState({
           results: res.data,
         });
+        const query = {
+          q: this.state.query,
+          type: this.state.type,
+        };
+        this.props.setquery(query);
       })
       .catch((err) => console.log(err));
   };
@@ -52,6 +55,11 @@ export default class Browse extends Component {
     this.setState({
       type: type,
       results: {},
+    });
+  };
+  handleRequest = () => {
+    this.setState({
+      browse: false,
     });
   };
   render() {
@@ -63,7 +71,12 @@ export default class Browse extends Component {
       result = this.state.results.albums.items.map((val, key) => {
         const ele = (
           <div key={key} className="d-flex row align-content-center mb-2">
-            <Image src={val.images[0].url} height="50px" width="50px"></Image>
+            <Image
+              src={val.images[0].url}
+              height="80px"
+              width="80px"
+              className="rounded-circle"
+            ></Image>
             <h5>{val.name}</h5>
           </div>
         );
@@ -98,8 +111,11 @@ export default class Browse extends Component {
         return ele;
       });
     }
+
     return (
-      <div>
+      <div className="d-flex col">
+        {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
+        <button onClick={this.handleRequest}>Go back</button>
         <h1>Hello Browser</h1>
         <div className="d-flex col">
           <InputGroup className="mb-3">
@@ -134,7 +150,23 @@ export default class Browse extends Component {
           </InputGroup>
         </div>
         <div className="ml-5">{result}</div>
+        <Recommender></Recommender>
       </div>
     );
   }
 }
+
+function mapStatetoProps(state) {
+  return {
+    query: state.query,
+  };
+}
+function mapDispatchtoProps(dispatch) {
+  return {
+    setquery: (data) => {
+      dispatch({ type: "SET_QUERY", payload: data });
+    },
+  };
+}
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(Browse);

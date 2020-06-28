@@ -1,6 +1,8 @@
 const defaultstate = {
   accessToken: "",
   login: false,
+  query: {},
+  history: [],
 };
 
 function reducer(state = defaultstate, action) {
@@ -19,6 +21,12 @@ function reducer(state = defaultstate, action) {
       return {
         ...state,
         accessToken: action.payload,
+      };
+    case "SET_QUERY":
+      return {
+        ...state,
+        query: action.payload,
+        history: state.history.concat(state.query),
       };
     default:
       return state;
