@@ -99,10 +99,12 @@ class Artists extends Component {
         <div className="hscroll">{artists}</div>
         <div>
           <Modal show={this.state.show} onHide={this.toggle}>
-            <Modal.Header closeButton>
-              <Modal.Title>{this.state.cur.name}</Modal.Title>
+            <Modal.Header closeButton className="bg-dark text-light">
+              <Modal.Title className="mx-auto display-4">
+                {this.state.cur.name}
+              </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="bg-dark text-light">
               {this.state.show && (
                 <div>
                   <Image
@@ -122,17 +124,23 @@ class Artists extends Component {
                           src={val.album.images[0].url}
                           height="60px"
                           width="60px"
-                          className="rounded-circle"
+                          className="mr-4"
                           alt={val.name}
                         ></img>
-                        <h5>{val.name}</h5>
+                        <div className="d-flex row">
+                          <h5 className="lead">
+                            {val.name}
+                            <br></br>
+                          </h5>
+                          <h4>{val.duration_ms}</h4>
+                        </div>
                       </div>
                     );
                   })}
                 </div>
               )}
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-dark text-light">
               <Button variant="secondary" onClick={this.toggle}>
                 Close
               </Button>
