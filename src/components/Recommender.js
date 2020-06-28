@@ -9,14 +9,11 @@ class Recommender extends Component {
   }
   componentDidUpdate = () => {
     console.log(this.props);
-    // this.setState({
-    //   history: this.state.history.concat(this.props.query),
-    // });
   };
   render() {
     return (
       <div>
-        <h1>Hello</h1>
+        <h1>Featured playlists for you</h1>
       </div>
     );
   }

@@ -4,7 +4,8 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Artists from "./Artists";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import Player from "./Player";
+import Recommender from "./Recommender";
+import ReactAudioPlayer from "react-audio-player";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class Dashboard extends Component {
               id="dropdown-variants-secondary"
             >
               <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item>
                 <Nav.Item onClick={this.handleLogout}>Logout</Nav.Item>
               </NavDropdown.Item>
             </NavDropdown>
@@ -90,7 +91,8 @@ class Dashboard extends Component {
         </Navbar>
         <h1>Welcome {this.state.user}</h1>
         <Artists></Artists>
-        <Player></Player>
+        <Recommender></Recommender>
+        <ReactAudioPlayer></ReactAudioPlayer>
       </div>
     );
   }

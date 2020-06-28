@@ -1,0 +1,21 @@
+.left {
+  flex: 50%;
+  overflow-y: scroll;
+  position: relative;
+  height: 100vh;
+}
+
+#result {
+  flex: 50%;
+  overflow-y: scroll;
+  position: relative;
+  height: 100vh;
+}
+
+#result::-webkit-scrollbar {
+  display: none;
+}
+
+.left::-webkit-scrollbar {
+  display: none;
+}

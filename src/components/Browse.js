@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ReactDOM from "react-dom";
+import "./Browse.css";
 import {
   InputGroup,
   FormControl,
   Button,
   Image,
   Dropdown,
+  Navbar,
+  Nav,
 } from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import Recommender from "./Recommender";
 
 class Browse extends Component {
   constructor(props) {
@@ -19,6 +22,7 @@ class Browse extends Component {
       results: {},
       type: "",
       browse: true,
+      tracks: {},
     };
   }
 
@@ -62,6 +66,69 @@ class Browse extends Component {
       browse: false,
     });
   };
+
+  getItem = (id, art) => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    axios({
+      method: "get",
+      url: `http://localhost:5000/albumtrack/?id=${id}&accessToken=${accessToken}`,
+    })
+      .then((res) => {
+        console.log(res);
+        const data = res.data.items.map((val, key) => {
+          const ele = (
+            <div key={key}>
+              <Image src={art} height="300px" width="300px"></Image>
+              <audio controls src={val.preview_url}></audio>
+              <h5>{val.name}</h5>
+            </div>
+          );
+          return ele;
+        });
+        console.log(data);
+        ReactDOM.render(data, document.getElementById("result"));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  getartist = (id, art) => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    axios({
+      method: "get",
+      url: `http://localhost:5000/tracks/?accessToken=${accessToken}&artistId=${id}`,
+    })
+      .then((res) => {
+        console.log(res);
+        let flag = 1;
+        const data = res.data.tracks.map((val, key) => {
+          const ele = (
+            <div key={key}>
+              {flag ? (
+                <Image
+                  src={
+                    art
+                      ? art.url
+                      : "https://cdn4.iconfinder.com/data/icons/users-26/100/user-01-512.png"
+                  }
+                  height="300px"
+                  width="300px"
+                ></Image>
+              ) : (
+                <p></p>
+              )}
+              <audio controls src={val.preview_url}></audio>
+              <h5>{val.name}</h5>
+            </div>
+          );
+          flag = 0;
+          return ele;
+        });
+        console.log(data);
+        ReactDOM.render(data, document.getElementById("result"));
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     let result = <div></div>;
     if (
@@ -70,7 +137,11 @@ class Browse extends Component {
     ) {
       result = this.state.results.albums.items.map((val, key) => {
         const ele = (
-          <div key={key} className="d-flex row align-content-center mb-2">
+          <div
+            onClick={() => this.getItem(val.id, val.images[0].url)}
+            key={key}
+            className="d-flex row align-content-center mb-2"
+          >
             <Image
               src={val.images[0].url}
               height="80px"
@@ -90,7 +161,11 @@ class Browse extends Component {
     ) {
       result = this.state.results.artists.items.map((val, key) => {
         const ele = (
-          <div key={key} className="d-flex row align-content-center mb-2">
+          <div
+            key={key}
+            className="d-flex row align-content-center mb-2"
+            onClick={() => this.getartist(val.id, val.images[0])}
+          >
             <Image
               src={
                 val.images[0]
@@ -103,9 +178,9 @@ class Browse extends Component {
             ></Image>
             <h5>
               {val.name}
+              <br></br>
               {val.followers.total}
             </h5>
-            <h5></h5>
           </div>
         );
         return ele;
@@ -113,44 +188,51 @@ class Browse extends Component {
     }
 
     return (
-      <div className="d-flex col">
-        {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
-        <button onClick={this.handleRequest}>Go back</button>
-        <h1>Hello Browser</h1>
-        <div className="d-flex col">
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Whats on your mind?"
-              aria-label="Search an album"
-              aria-describedby="basic-addon2"
-              onChange={this.handleChange}
-            />
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Look By
-              </Dropdown.Toggle>
+      <div className="d-flex col content main">
+        <div className="left">
+          {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
+          <Navbar bg="dark">
+            <Nav.Link className="text-light" onClick={this.handleRequest}>
+              Back
+            </Nav.Link>
+          </Navbar>
+          <h1>Hello Browser</h1>
+          <div className="d-flex col">
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Whats on your mind?"
+                aria-label="Search an album"
+                aria-describedby="basic-addon2"
+                onChange={this.handleChange}
+              />
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Look By
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => this.changeType("album")}>
-                  Albums
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => this.changeType("artist")}>
-                  Artist
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => this.changeType("genre")}>
-                  Genre
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <InputGroup.Append>
-              <Button variant="outline-secondary" onClick={this.handleSearch}>
-                Search
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => this.changeType("album")}>
+                    Albums
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => this.changeType("artist")}>
+                    Artist
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => this.changeType("genre")}>
+                    Genre
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <InputGroup.Append>
+                <Button variant="outline-secondary" onClick={this.handleSearch}>
+                  Search
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </div>
+          <div className="ml-5">{result}</div>
         </div>
-        <div className="ml-5">{result}</div>
-        <Recommender></Recommender>
+
+        <div id="result"></div>
       </div>
     );
   }
