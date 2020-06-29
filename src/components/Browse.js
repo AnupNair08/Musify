@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import "./Browse.css";
+import "./Artists.css";
 import {
   InputGroup,
   FormControl,
@@ -14,6 +15,7 @@ import {
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
+import Footer from "./Footer";
 class Browse extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +69,12 @@ class Browse extends Component {
     });
   };
 
+  play = (url) => {
+    this.setState({
+      curtrack: url,
+    });
+  };
+
   getItem = (id, art) => {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
@@ -77,10 +85,13 @@ class Browse extends Component {
         console.log(res);
         const data = res.data.items.map((val, key) => {
           const ele = (
-            <div key={key} className="d-flex col">
+            <div
+              key={key}
+              className="d-flex row align-items-center justify-content-center"
+            >
               <Image src={art} height="300px" width="300px"></Image>
-              <audio controls src={val.preview_url}></audio>
-              <h5>{val.name}</h5>
+              <h5 className="w-100">{val.name}</h5>
+              <Button onClick={() => this.play(val.preview_url)}>Play</Button>
             </div>
           );
           return ele;
@@ -117,13 +128,12 @@ class Browse extends Component {
                 <p></p>
               )}
               <audio controls src={val.preview_url}></audio>
-              <h5>{val.name}</h5>
+              <h6 className="display-4">{val.name}</h6>
             </div>
           );
           flag = 0;
           return ele;
         });
-        console.log(data);
         ReactDOM.render(data, document.getElementById("result"));
       })
       .catch((err) => console.log(err));
@@ -148,7 +158,7 @@ class Browse extends Component {
               width="80px"
               className="rounded-circle"
             ></Image>
-            <h5>{val.name}</h5>
+            <h6>{val.name}</h6>
           </div>
         );
         return ele;
@@ -188,51 +198,61 @@ class Browse extends Component {
     }
 
     return (
-      <div className="d-flex col content main">
-        <div className="left">
-          {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
+      <div className="d-flex row text-light">
+        <div className="w-100">
           <Navbar bg="dark">
             <Nav.Link className="text-light" onClick={this.handleRequest}>
               Back
             </Nav.Link>
+            <Nav.Item className="mx-auto">
+              <h1>Hello Browser</h1>
+            </Nav.Item>
           </Navbar>
-          <h1>Hello Browser</h1>
-          <div className="d-flex col">
-            <InputGroup className="mb-3">
-              <FormControl
-                placeholder="Whats on your mind?"
-                aria-label="Search an album"
-                aria-describedby="basic-addon2"
-                onChange={this.handleChange}
-              />
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Look By
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => this.changeType("album")}>
-                    Albums
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => this.changeType("artist")}>
-                    Artist
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => this.changeType("genre")}>
-                    Genre
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <InputGroup.Append>
-                <Button variant="outline-secondary" onClick={this.handleSearch}>
-                  Search
-                </Button>
-              </InputGroup.Append>
-            </InputGroup>
-          </div>
-          <div className="ml-5">{result}</div>
         </div>
+        <div className="d-flex col content main">
+          <div className="left">
+            {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
+            <div className="d-flex col">
+              <InputGroup className="mb-3">
+                <FormControl
+                  placeholder="Whats on your mind?"
+                  aria-label="Search an album"
+                  aria-describedby="basic-addon2"
+                  onChange={this.handleChange}
+                />
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Look By
+                  </Dropdown.Toggle>
 
-        <div id="result"></div>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => this.changeType("album")}>
+                      Albums
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.changeType("artist")}>
+                      Artist
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.changeType("genre")}>
+                      Genre
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <InputGroup.Append>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={this.handleSearch}
+                  >
+                    Search
+                  </Button>
+                </InputGroup.Append>
+              </InputGroup>
+            </div>
+            <div className="ml-5">{result}</div>
+          </div>
+
+          <div id="result" className="hscroll"></div>
+        </div>
+        <Footer song={this.state.curtrack}></Footer>
       </div>
     );
   }

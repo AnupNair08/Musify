@@ -1,15 +1,24 @@
+body > #root > div > .bmain {
+  height: 100vh;
+}
+
 .left {
   flex: 50%;
   overflow-y: scroll;
   position: relative;
-  height: 100vh;
+  height: 75vh;
+  background-color: black;
+  font-size: x-small;
+  width: 48vw;
 }
 
 #result {
   flex: 50%;
   overflow-y: scroll;
   position: relative;
-  height: 100vh;
+  height: 75vh;
+  width: 48vw;
+  background-color: black;
 }
 
 #result::-webkit-scrollbar {
@@ -18,4 +27,11 @@
 
 .left::-webkit-scrollbar {
   display: none;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
 }

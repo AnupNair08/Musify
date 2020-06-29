@@ -5,6 +5,7 @@ import axios from "axios";
 import { Image, Modal, Button } from "react-bootstrap";
 import "./Dashboard.css";
 import "./Artists.css";
+import Footer from "./Footer";
 
 class Artists extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Artists extends Component {
       show: false,
       cur: {},
       tracks: [],
+      song: "",
     };
   }
 
@@ -62,16 +64,12 @@ class Artists extends Component {
       });
     }
   };
-
   play = (url) => {
     if (!url) return;
-    const ele = (
-      <div>
-        <audio controls src={url}></audio>
-      </div>
-    );
+    this.setState({
+      song: url,
+    });
     this.toggle();
-    ReactDOM.render(ele, document.getElementById("player"));
   };
 
   msToTime = (duration) => {
@@ -161,7 +159,7 @@ class Artists extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
-          <div id="player"></div>
+          <Footer song={this.state.song}></Footer>
         </div>
       </div>
     );
