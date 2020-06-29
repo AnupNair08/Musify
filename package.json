@@ -20,6 +20,8 @@
     "react-h5-audio-player": "^3.2.0",
     "react-iframe": "^1.8.0",
     "react-jinke-music-player": "^4.15.3",
+    "react-notification-component": "^1.1.4",
+    "react-notifications-component": "^2.4.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",

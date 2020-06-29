@@ -14,6 +14,9 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { store } from "react-notifications-component";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 import Footer from "./Footer";
 class Browse extends Component {
@@ -70,6 +73,22 @@ class Browse extends Component {
   };
 
   play = (url) => {
+    if (!url) {
+      store.addNotification({
+        title: "No Preview",
+        message: "Preview link not found",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 1000,
+          onScreen: true,
+        },
+      });
+      return;
+    }
     this.setState({
       curtrack: url,
     });
@@ -87,7 +106,7 @@ class Browse extends Component {
           const ele = (
             <div
               key={key}
-              className="d-flex row align-items-center justify-content-center"
+              className="d-flex row align-items-center justify-content-center mr-5"
             >
               <Image src={art} height="300px" width="300px"></Image>
               <h5 className="w-100">{val.name}</h5>
@@ -110,28 +129,22 @@ class Browse extends Component {
     })
       .then((res) => {
         console.log(res);
-        let flag = 1;
         const data = res.data.tracks.map((val, key) => {
           const ele = (
             <div key={key}>
-              {flag ? (
-                <Image
-                  src={
-                    art
-                      ? art.url
-                      : "https://cdn4.iconfinder.com/data/icons/users-26/100/user-01-512.png"
-                  }
-                  height="300px"
-                  width="300px"
-                ></Image>
-              ) : (
-                <p></p>
-              )}
-              <audio controls src={val.preview_url}></audio>
-              <h6 className="display-4">{val.name}</h6>
+              <Image
+                src={
+                  art
+                    ? art.url
+                    : "https://cdn4.iconfinder.com/data/icons/users-26/100/user-01-512.png"
+                }
+                height="300px"
+                width="300px"
+              ></Image>
+              <h6 className="w-100">{val.name}</h6>
+              <Button onClick={() => this.play(val.preview_url)}>Play</Button>
             </div>
           );
-          flag = 0;
           return ele;
         });
         ReactDOM.render(data, document.getElementById("result"));
@@ -151,6 +164,7 @@ class Browse extends Component {
             onClick={() => this.getItem(val.id, val.images[0].url)}
             key={key}
             className="d-flex row align-content-center mb-2"
+            role="button"
           >
             <Image
               src={val.images[0].url}
@@ -158,7 +172,7 @@ class Browse extends Component {
               width="80px"
               className="rounded-circle"
             ></Image>
-            <h6>{val.name}</h6>
+            <h6 className="d-flex col  align-items-center w-100">{val.name}</h6>
           </div>
         );
         return ele;
@@ -182,15 +196,11 @@ class Browse extends Component {
                   ? val.images[0].url
                   : "https://cdn4.iconfinder.com/data/icons/users-26/100/user-01-512.png"
               }
-              height="50px"
-              width="50px"
+              height="100px"
+              width="100px"
               className="rounded-circle"
             ></Image>
-            <h5>
-              {val.name}
-              <br></br>
-              {val.followers.total}
-            </h5>
+            <h5 className="d-flex col  align-items-center w-100">{val.name}</h5>
           </div>
         );
         return ele;
@@ -199,13 +209,14 @@ class Browse extends Component {
 
     return (
       <div className="d-flex row text-light">
+        <ReactNotification />
         <div className="w-100">
           <Navbar bg="dark">
             <Nav.Link className="text-light" onClick={this.handleRequest}>
               Back
             </Nav.Link>
             <Nav.Item className="mx-auto">
-              <h1>Hello Browser</h1>
+              <h1>What are you looking for?</h1>
             </Nav.Item>
           </Navbar>
         </div>

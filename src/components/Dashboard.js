@@ -59,7 +59,7 @@ class Dashboard extends Component {
       return <Redirect to="/login"></Redirect>;
     }
     return (
-      <div className="lead main text-light">
+      <div className="lead main text-light mb-7">
         {this.state.browse && (
           <Redirect to="/browse" from="/dashboard"></Redirect>
         )}
@@ -96,15 +96,13 @@ class Dashboard extends Component {
             <Waves backGroundColor="#000" />
           </div>
         </div>
-        <div className="pb-8">
+        <div className="p-8">
           <Artists></Artists>
         </div>
-        <div className="pb-8">
+        <div className="p-8">
           <Recommender></Recommender>
         </div>
-        <div className="pb-8">
-          <ReactAudioPlayer></ReactAudioPlayer>
-        </div>
+        <div className="p-20"></div>
       </div>
     );
   }

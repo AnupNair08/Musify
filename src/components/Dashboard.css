@@ -1,6 +1,7 @@
 .hscroll {
   display: flex;
   overflow-x: auto;
+  margin-bottom: 80px;
 }
 
 .hscroll::-webkit-scrollbar {

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Image, Modal, Button } from "react-bootstrap";
 import "./Dashboard.css";
 import "./Artists.css";
 import Footer from "./Footer";
+import { store } from "react-notifications-component";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 class Artists extends Component {
   constructor(props) {
@@ -65,7 +67,22 @@ class Artists extends Component {
     }
   };
   play = (url) => {
-    if (!url) return;
+    if (!url) {
+      store.addNotification({
+        title: "No Preview",
+        message: "Preview link not found",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 1000,
+          onScreen: true,
+        },
+      });
+      return;
+    }
     this.setState({
       song: url,
     });
@@ -107,6 +124,7 @@ class Artists extends Component {
 
     return (
       <div>
+        <ReactNotification />
         <h1>Checkout your top artists</h1>
         <div className="hscroll">{artists}</div>
         <div>
