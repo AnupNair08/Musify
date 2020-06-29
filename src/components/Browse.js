@@ -37,7 +37,23 @@ class Browse extends Component {
     });
   };
 
-  handleSearch = (e) => {
+  handleSearch = () => {
+    if (!this.state.query) {
+      store.addNotification({
+        title: "No Query",
+        message: "Please enter a search query",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 1000,
+          onScreen: true,
+        },
+      });
+      return;
+    }
     axios({
       method: "get",
       url: `http://localhost:5000/search/?q=${
@@ -208,22 +224,14 @@ class Browse extends Component {
     }
 
     return (
-      <div className="d-flex row text-light">
+      <div className="d-flex row text-light thide">
         <ReactNotification />
         <div className="w-100">
           <Navbar bg="dark">
             <Nav.Link className="text-light" onClick={this.handleRequest}>
               Back
             </Nav.Link>
-            <Nav.Item className="mx-auto">
-              <h1>What are you looking for?</h1>
-            </Nav.Item>
-          </Navbar>
-        </div>
-        <div className="d-flex col content main">
-          <div className="left">
-            {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
-            <div className="d-flex col">
+            <Nav.Item className="mx-auto w-80">
               <InputGroup className="mb-3">
                 <FormControl
                   placeholder="Whats on your mind?"
@@ -243,21 +251,21 @@ class Browse extends Component {
                     <Dropdown.Item onClick={() => this.changeType("artist")}>
                       Artist
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.changeType("genre")}>
-                      Genre
-                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 <InputGroup.Append>
-                  <Button
-                    variant="outline-secondary"
-                    onClick={this.handleSearch}
-                  >
+                  <Button variant="outline-primary" onClick={this.handleSearch}>
                     Search
                   </Button>
                 </InputGroup.Append>
               </InputGroup>
-            </div>
+            </Nav.Item>
+          </Navbar>
+        </div>
+        <div className="d-flex col content main w-100">
+          <div className="left">
+            {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
+            <div className="d-flex col"></div>
             <div className="ml-5">{result}</div>
           </div>
 

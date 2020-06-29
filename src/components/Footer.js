@@ -20,7 +20,7 @@ export default class AppFooter extends Component {
   render() {
     return (
       <div className="fixed-bottom">
-        <div className="d-flex w-100">
+        <div className="d-flex w-96">
           <AudioPlayer autoPlay src={this.state.curtrack}></AudioPlayer>
         </div>
       </div>
