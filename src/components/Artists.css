@@ -2,4 +2,14 @@
   border-radius: 50%;
   height: 300px;
   width: 300px;
+  z-index: 0;
+}
+
+.gradient {
+  background: -webkit-radial-gradient(
+    top center,
+    ellipse cover,
+    rgba(25, 180, 252, 0.2) 0%,
+    rgba(26, 2, 65, 0.5) 100%
+  );
 }

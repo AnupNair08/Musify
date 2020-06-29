@@ -27,7 +27,10 @@ class Recommender extends Component {
         console.log(res);
         const result = res.data.playlists.items.map((val, key) => {
           const ele = (
-            <div key={key} className="d-flex row align-content-center">
+            <div
+              key={key}
+              className="d-flex row align-content-center justify-content-center"
+            >
               <Image
                 src={val.images[0].url}
                 height="300px"

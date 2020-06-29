@@ -74,19 +74,33 @@ class Artists extends Component {
     ReactDOM.render(ele, document.getElementById("player"));
   };
 
+  msToTime = (duration) => {
+    var seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
+  };
+
   render() {
     const artists = this.state.data.map((val, key) => {
       const ele = (
-        <div key={key} className="d-flex row align-content-center">
-          <Image
-            src={val.images[0].url}
-            className="artist"
-            alt={val.name}
-            onClick={() => {
-              this.gettracks(val.id);
-              this.toggle(val);
-            }}
-          ></Image>
+        <div
+          key={key}
+          className="d-flex row align-content-center justify-content-center"
+        >
+          <div className="rounded-circle gradient">
+            <Image
+              src={val.images[0].url}
+              className="artist"
+              alt={val.name}
+              onClick={() => {
+                this.gettracks(val.id);
+                this.toggle(val);
+              }}
+            ></Image>
+          </div>
           <h3>{val.name}</h3>
         </div>
       );
@@ -95,7 +109,7 @@ class Artists extends Component {
 
     return (
       <div>
-        <h1>Artists</h1>
+        <h1>Checkout your top artists</h1>
         <div className="hscroll">{artists}</div>
         <div>
           <Modal show={this.state.show} onHide={this.toggle}>
@@ -122,17 +136,18 @@ class Artists extends Component {
                       >
                         <img
                           src={val.album.images[0].url}
-                          height="60px"
-                          width="60px"
+                          height="100px"
+                          width="100px"
                           className="mr-4"
                           alt={val.name}
                         ></img>
                         <div className="d-flex row">
-                          <h5 className="lead">
+                          <h5 className="lead font-weight-bold w-100 mb-1">
                             {val.name}
-                            <br></br>
                           </h5>
-                          <h4>{val.duration_ms}</h4>
+                          <h4 className="lead mt-0">
+                            {this.msToTime(val.duration_ms)}
+                          </h4>
                         </div>
                       </div>
                     );

@@ -6,6 +6,7 @@ import Artists from "./Artists";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Recommender from "./Recommender";
 import ReactAudioPlayer from "react-audio-player";
+import Waves from "css-waves/Waves";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -58,11 +59,11 @@ class Dashboard extends Component {
       return <Redirect to="/login"></Redirect>;
     }
     return (
-      <div>
+      <div className="lead main text-light">
         {this.state.browse && (
           <Redirect to="/browse" from="/dashboard"></Redirect>
         )}
-        <Navbar bg="dark" variant="dark" sticky>
+        <Navbar className="navbg" variant="dark" sticky>
           <Navbar.Brand>Musify</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link onClick={this.browse}>Browse</Nav.Link>
@@ -89,10 +90,21 @@ class Dashboard extends Component {
             ></img>
           </Nav>
         </Navbar>
-        <h1>Welcome {this.state.user}</h1>
-        <Artists></Artists>
-        <Recommender></Recommender>
-        <ReactAudioPlayer></ReactAudioPlayer>
+        <div className="welcome mb-8">
+          <h1>Welcome {this.state.user}</h1>
+          <div>
+            <Waves backGroundColor="#000" />
+          </div>
+        </div>
+        <div className="pb-8">
+          <Artists></Artists>
+        </div>
+        <div className="pb-8">
+          <Recommender></Recommender>
+        </div>
+        <div className="pb-8">
+          <ReactAudioPlayer></ReactAudioPlayer>
+        </div>
       </div>
     );
   }

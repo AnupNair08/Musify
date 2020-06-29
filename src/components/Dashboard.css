@@ -6,3 +6,18 @@
 .hscroll::-webkit-scrollbar {
   display: none;
 }
+
+.main {
+  background-color: black;
+}
+
+.welcome {
+  background-color: black;
+  color: azure;
+  height: 200px;
+  overflow-x: hidden;
+}
+
+.navbg {
+  background-color: black;
+}

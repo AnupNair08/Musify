@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SpotifyLogin from "react-spotify-login";
 import { connect } from "react-redux";
+import "./Login.css";
+import { Image } from "react-bootstrap";
 
 class Login extends Component {
   constructor(props) {
@@ -28,15 +30,25 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Hello from Login</h1>
-        <SpotifyLogin
-          clientId={process.env.REACT_APP_CLIENT_ID}
-          redirectUri="http://localhost:3000/login"
-          onSuccess={this.success}
-          onFailure={this.failure}
-          scope={("user-read-private", "streaming", "user-top-read")}
-        />
+      <div
+        className="d-flex row justify-content-center align-item-center "
+        id="login"
+      >
+        <div className="w-100">
+          <h1>Musify</h1>
+          <p className="text-muted">A mini spotify client</p>
+          <Image src="https://cdn1.iconfinder.com/data/icons/multimedia-sound-3/32/Analyze-_sound-_wave-music-512.png"></Image>
+        </div>
+        <div>
+          <SpotifyLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            redirectUri="http://localhost:3000/login"
+            onSuccess={this.success}
+            onFailure={this.failure}
+            scope={("user-read-private", "streaming", "user-top-read")}
+            className="btn btn-outline-success"
+          />
+        </div>
       </div>
     );
   }
