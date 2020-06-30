@@ -37,6 +37,7 @@ class Dashboard extends Component {
         });
       })
       .catch((err) => console.log(err));
+    this.props.setsong("");
   };
 
   handleLogout = () => {
@@ -58,7 +59,7 @@ class Dashboard extends Component {
   render() {
     const status = sessionStorage.getItem("login");
     if (status === "false") {
-      return <Redirect to="/login"></Redirect>;
+      return <Redirect to="/"></Redirect>;
     }
     return (
       <div className="lead main text-light mb-7">
@@ -133,6 +134,9 @@ function mapDispatchtoProps(dispatch) {
     },
     setAcessToken: (data) => {
       dispatch({ type: "SET_ACCESS_TOKEN", payload: data });
+    },
+    setsong: (url) => {
+      dispatch({ type: "SET_SONG", payload: url });
     },
   };
 }
