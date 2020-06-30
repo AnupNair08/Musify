@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
+//Get self top artisits
 router.get("/artists", async (req, res) => {
   const accessToken = req.query.accessToken;
   console.log(accessToken);
@@ -17,6 +18,7 @@ router.get("/artists", async (req, res) => {
   res.json(f);
 });
 
+//Get self top tracks
 router.get("/toptracks", async (req, res) => {
   const accessToken = req.query.accessToken;
   console.log(accessToken);
@@ -32,6 +34,7 @@ router.get("/toptracks", async (req, res) => {
   res.json(f);
 });
 
+//Get tracks from an artist ID
 router.get("/tracks", async (req, res) => {
   const accessToken = req.query.accessToken;
   const artistId = req.query.artistId;
@@ -50,6 +53,7 @@ router.get("/tracks", async (req, res) => {
   res.json(f);
 });
 
+//Search query
 router.get("/search", async (req, res) => {
   const q = req.query.q;
   const accessToken = req.query.accessToken;
@@ -70,6 +74,7 @@ router.get("/search", async (req, res) => {
   res.json(f);
 });
 
+//Get tracks from an album id
 router.get("/albumtrack", async (req, res) => {
   const id = req.query.id;
   const accessToken = req.query.accessToken;
@@ -85,6 +90,25 @@ router.get("/albumtrack", async (req, res) => {
   res.json(f);
 });
 
+//Get featured playlists
+router.get("/featured", async (req, res) => {
+  const accessToken = req.query.accessToken;
+  console.log(req.query);
+  const headers = {
+    Authorization: "Bearer " + accessToken,
+  };
+  let result = await fetch(
+    `https://api.spotify.com/v1/browse/featured-playlists`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+  const f = await result.json();
+  res.json(f);
+});
+
+//Get tracks from featured playlists
 router.get("/playlist", async (req, res) => {
   const id = req.query.id;
   const accessToken = req.query.accessToken;
@@ -103,14 +127,14 @@ router.get("/playlist", async (req, res) => {
   res.json(f);
 });
 
-router.get("/featured", async (req, res) => {
+router.get("/recommendations", async (req, res) => {
   const accessToken = req.query.accessToken;
   console.log(req.query);
   const headers = {
     Authorization: "Bearer " + accessToken,
   };
   let result = await fetch(
-    `https://api.spotify.com/v1/browse/featured-playlists`,
+    `https://api.spotify.com/v1/recommendations?seed_genres=filmi`,
     {
       method: "GET",
       headers: headers,

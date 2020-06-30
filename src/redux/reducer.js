@@ -4,6 +4,7 @@ const defaultstate = {
   query: {},
   history: [],
   data: [],
+  song: "",
 };
 
 function reducer(state = defaultstate, action) {
@@ -34,6 +35,11 @@ function reducer(state = defaultstate, action) {
         ...state,
         data: action.payload[0],
         art: action.payload[1],
+      };
+    case "SET_SONG":
+      return {
+        ...state,
+        song: action.payload,
       };
     default:
       return state;

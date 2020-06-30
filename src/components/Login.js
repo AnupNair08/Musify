@@ -14,7 +14,7 @@ class Login extends Component {
   }
 
   success = (res) => {
-    console.log("Succesfull login");
+    // console.log("Succesfull login");
     this.setState({
       accessToken: res.access_token,
       login: true,

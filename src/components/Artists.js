@@ -86,6 +86,7 @@ class Artists extends Component {
     this.setState({
       song: url,
     });
+    this.props.setsong(url);
     this.toggle();
   };
 
@@ -177,7 +178,7 @@ class Artists extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
-          <Footer song={this.state.song}></Footer>
+          {/* <Footer song={this.state.song}></Footer> */}
         </div>
       </div>
     );
@@ -190,4 +191,12 @@ function mapStatetoProps(state) {
   };
 }
 
-export default connect(mapStatetoProps)(Artists);
+function mapDispatchToProps(dispatch) {
+  return {
+    setsong: (song) => {
+      dispatch({ type: "SET_SONG", payload: song });
+    },
+  };
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Artists);

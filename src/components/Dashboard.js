@@ -6,6 +6,9 @@ import Artists from "./Artists";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Recommender from "./Recommender";
 import Waves from "css-waves/Waves";
+import Recommendations from "./Recommendations";
+import Tracks from "./Tracks";
+import Footer from "./Footer";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class Dashboard extends Component {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           user: res.data.display_name,
           profile: res.data.images[0].url,
@@ -101,7 +104,15 @@ class Dashboard extends Component {
         <div className="p-8">
           <Recommender></Recommender>
         </div>
-        <div className="p-20"></div>
+        <div className="p-8">
+          <Tracks></Tracks>
+        </div>
+        <div className="p-8">
+          <Recommendations></Recommendations>
+        </div>
+        <div className="p-8">
+          <Footer song={this.props.song}></Footer>
+        </div>
       </div>
     );
   }
@@ -111,6 +122,7 @@ function mapStatetoProps(state) {
   return {
     accessToken: state.accessToken,
     login: state.login,
+    song: state.song,
   };
 }
 
