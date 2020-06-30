@@ -11,7 +11,7 @@ class Recommender extends Component {
     super();
     this.state = {
       history: [],
-      result: <h1></h1>,
+      result: <h1> </h1>,
       move: false,
     };
   }

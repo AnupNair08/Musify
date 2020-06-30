@@ -83,6 +83,7 @@ class Browse extends Component {
     });
   };
   handleRequest = () => {
+    this.props.setsong("");
     this.setState({
       browse: false,
     });
@@ -286,6 +287,9 @@ function mapDispatchtoProps(dispatch) {
   return {
     setquery: (data) => {
       dispatch({ type: "SET_QUERY", payload: data });
+    },
+    setsong: (data) => {
+      dispatch({ type: "SET_SONG", payload: data });
     },
   };
 }

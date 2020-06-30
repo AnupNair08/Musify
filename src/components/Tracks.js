@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Image } from "react-bootstrap";
 import axios from "axios";
 import "./Dashboard.css";
-import Footer from "./Footer";
 import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -60,7 +59,7 @@ class Tracks extends Component {
       const ele = (
         <div
           key={key}
-          className="d-flex row align-content-center justify-content-center"
+          className="d-flex row align-content-center justify-content-center mx-2"
           onClick={() => this.play(val.preview_url)}
         >
           <Image
@@ -68,7 +67,7 @@ class Tracks extends Component {
             height="300px"
             width="300px"
           ></Image>
-          <h5>{val.name}</h5>
+          <h6 className="mt-3">{val.name}</h6>
         </div>
       );
       return ele;
@@ -78,7 +77,6 @@ class Tracks extends Component {
         <ReactNotification />
         <h1>Top Tracks for you</h1>
         <div className="hscroll">{tracks}</div>
-        {/* <Footer song={this.state.song}></Footer> */}
       </div>
     );
   }

@@ -43,6 +43,7 @@ class Login extends Component {
           <SpotifyLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             redirectUri="http://localhost:3000/login"
+            // redirectUri="https://f83973485589.ngrok.io/login"
             onSuccess={this.success}
             onFailure={this.failure}
             scope={("user-read-private", "streaming", "user-top-read")}

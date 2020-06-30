@@ -128,14 +128,11 @@ function mapStatetoProps(state) {
 
 function mapDispatchtoProps(dispatch) {
   return {
-    setuser: (user) => {
-      dispatch({ type: "SET_USER", payload: user });
-    },
-    setAcessToken: (accessToken) => {
-      dispatch({ type: "SET_ACCESS_TOKEN", payload: accessToken });
-    },
     setlogin: (status) => {
       dispatch({ type: "LOGIN", payload: status });
+    },
+    setAcessToken: (data) => {
+      dispatch({ type: "SET_ACCESS_TOKEN", payload: data });
     },
   };
 }

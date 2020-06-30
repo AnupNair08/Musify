@@ -4,7 +4,6 @@ import axios from "axios";
 import { Image, Modal, Button } from "react-bootstrap";
 import "./Dashboard.css";
 import "./Artists.css";
-import Footer from "./Footer";
 import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -178,17 +177,10 @@ class Artists extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
-          {/* <Footer song={this.state.song}></Footer> */}
         </div>
       </div>
     );
   }
-}
-function mapStatetoProps(state) {
-  return {
-    accessToken: state.accessToken,
-    login: state.login,
-  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -199,4 +191,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(Artists);
+export default connect(null, mapDispatchToProps)(Artists);
