@@ -5,6 +5,8 @@ const defaultstate = {
   history: [],
   data: [],
   song: "",
+  genre: [],
+  loaded: false,
 };
 
 function reducer(state = defaultstate, action) {
@@ -40,6 +42,16 @@ function reducer(state = defaultstate, action) {
       return {
         ...state,
         song: action.payload,
+      };
+    case "SET_GENRE":
+      return {
+        ...state,
+        genre: action.payload,
+      };
+    case "SET_LOADED":
+      return {
+        ...state,
+        loaded: action.payload,
       };
     default:
       return state;

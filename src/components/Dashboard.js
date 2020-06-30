@@ -109,7 +109,7 @@ class Dashboard extends Component {
           <Tracks></Tracks>
         </div>
         <div className="p-8">
-          <Recommendations></Recommendations>
+          {this.props.loaded && <Recommendations></Recommendations>}
         </div>
         <div className="p-8">
           <Footer song={this.props.song}></Footer>
@@ -124,6 +124,7 @@ function mapStatetoProps(state) {
     accessToken: state.accessToken,
     login: state.login,
     song: state.song,
+    loaded: state.loaded,
   };
 }
 

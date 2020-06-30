@@ -129,12 +129,14 @@ router.get("/playlist", async (req, res) => {
 
 router.get("/recommendations", async (req, res) => {
   const accessToken = req.query.accessToken;
+  const genre = req.query.genre;
+
   console.log(req.query);
   const headers = {
     Authorization: "Bearer " + accessToken,
   };
   let result = await fetch(
-    `https://api.spotify.com/v1/recommendations?seed_genres=filmi`,
+    `https://api.spotify.com/v1/recommendations?seed_genres=${genre}`,
     {
       method: "GET",
       headers: headers,

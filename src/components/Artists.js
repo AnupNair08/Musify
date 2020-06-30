@@ -32,6 +32,15 @@ class Artists extends Component {
         this.setState({
           data: res.data.items,
         });
+        let genres = [];
+        for (let i = 0; i < res.data.items.length; i++) {
+          for (let j = 0; j < res.data.items[i].genres.length; j++) {
+            genres.push(res.data.items[i].genres[j]);
+          }
+        }
+        const s = new Set(genres);
+        this.props.setgenre(s);
+        this.props.setloaded(true);
       })
       .catch((err) => console.log(err));
     // this.getArtisits();
@@ -187,6 +196,12 @@ function mapDispatchToProps(dispatch) {
   return {
     setsong: (song) => {
       dispatch({ type: "SET_SONG", payload: song });
+    },
+    setgenre: (data) => {
+      dispatch({ type: "SET_GENRE", payload: data });
+    },
+    setloaded: (data) => {
+      dispatch({ type: "SET_LOADED", payload: data });
     },
   };
 }
