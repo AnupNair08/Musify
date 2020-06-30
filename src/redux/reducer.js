@@ -3,6 +3,7 @@ const defaultstate = {
   login: false,
   query: {},
   history: [],
+  data: [],
 };
 
 function reducer(state = defaultstate, action) {
@@ -27,6 +28,12 @@ function reducer(state = defaultstate, action) {
         ...state,
         query: action.payload,
         history: state.history.concat(state.query),
+      };
+    case "SET_DATA":
+      return {
+        ...state,
+        data: action.payload[0],
+        art: action.payload[1],
       };
     default:
       return state;

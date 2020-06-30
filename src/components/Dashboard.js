@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 import Artists from "./Artists";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Recommender from "./Recommender";
-import ReactAudioPlayer from "react-audio-player";
 import Waves from "css-waves/Waves";
 
 class Dashboard extends Component {

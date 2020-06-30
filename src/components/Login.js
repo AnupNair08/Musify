@@ -31,7 +31,7 @@ class Login extends Component {
   render() {
     return (
       <div
-        className="d-flex row justify-content-center align-item-center "
+        className="d-flex row justify-content-center align-item-center text-light"
         id="login"
       >
         <div className="w-100">

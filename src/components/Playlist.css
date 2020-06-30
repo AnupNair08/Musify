@@ -1,0 +1,22 @@
+.left {
+  flex: 50%;
+  overflow-y: scroll;
+  position: relative;
+  height: 75vh;
+  background-color: black;
+  font-size: x-small;
+  width: 50vw;
+}
+
+.right {
+  flex: 50%;
+  overflow-y: scroll;
+  position: relative;
+  height: 75vh;
+  width: 50vw;
+  background-color: black;
+  text-align: left;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  padding-right: 30px;
+}

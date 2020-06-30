@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Image } from "react-bootstrap";
 import "./Artists.css";
+import { Redirect } from "react-router-dom";
 
 class Recommender extends Component {
   constructor(props) {
@@ -11,10 +12,27 @@ class Recommender extends Component {
     this.state = {
       history: [],
       result: <h1></h1>,
+      move: false,
     };
   }
   componentDidUpdate = () => {
     console.log(this.props);
+  };
+
+  getItem = (id, art) => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    axios({
+      method: "get",
+      url: `http://localhost:5000/playlist/?accessToken=${accessToken}&id=${id}`,
+    })
+      .then((res) => {
+        console.log(res);
+        this.props.setdata(res.data.items, art);
+        this.setState({
+          move: true,
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   componentDidMount = () => {
@@ -30,6 +48,7 @@ class Recommender extends Component {
             <div
               key={key}
               className="d-flex row align-content-center justify-content-center"
+              onClick={() => this.getItem(val.id, val.images[0].url)}
             >
               <Image
                 src={val.images[0].url}
@@ -46,6 +65,9 @@ class Recommender extends Component {
       .catch((err) => console.log(err));
   };
   render() {
+    if (this.state.move) {
+      return <Redirect to="/featured"></Redirect>;
+    }
     return (
       <div>
         <h1>Featured playlists for you</h1>
@@ -60,4 +82,12 @@ function mapStatetoProps(state) {
   };
 }
 
-export default connect(mapStatetoProps)(Recommender);
+function mapDispatchToProps(dispatch) {
+  return {
+    setdata: (data, art) => {
+      dispatch({ type: "SET_DATA", payload: [data, art] });
+    },
+  };
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Recommender);
