@@ -7,7 +7,7 @@ import "./Artists.css";
 import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-
+let pd = "";
 class Artists extends Component {
   constructor(props) {
     super(props);
@@ -117,7 +117,7 @@ class Artists extends Component {
           <div className="rounded-circle gradient">
             <Image
               src={val.images[0].url}
-              className="artist"
+              className={`artist ${pd}`}
               alt={val.name}
               onClick={() => {
                 this.gettracks(val.id);
@@ -163,7 +163,7 @@ class Artists extends Component {
                           src={val.album.images[0].url}
                           height="100px"
                           width="100px"
-                          className="mr-4"
+                          className={`mr-4`}
                           alt={val.name}
                         ></img>
                         <div className="d-flex row">

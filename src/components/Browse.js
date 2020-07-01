@@ -148,7 +148,10 @@ class Browse extends Component {
         console.log(res);
         const data = res.data.tracks.map((val, key) => {
           const ele = (
-            <div key={key}>
+            <div
+              key={key}
+              className="d-flex row px-5 justify-content-center align-items-center"
+            >
               <Image
                 src={
                   art
@@ -241,9 +244,10 @@ class Browse extends Component {
                   onChange={this.handleChange}
                 />
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Look By
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle
+                    variant="success"
+                    id="dropdown-basic"
+                  ></Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => this.changeType("album")}>
@@ -255,15 +259,35 @@ class Browse extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
                 <InputGroup.Append>
-                  <Button variant="outline-primary" onClick={this.handleSearch}>
-                    Search
+                  <Button
+                    variant="outline-primary"
+                    className="bi bi-search"
+                    onClick={this.handleSearch}
+                  >
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-search"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                      />
+                    </svg>
                   </Button>
                 </InputGroup.Append>
               </InputGroup>
             </Nav.Item>
           </Navbar>
         </div>
-        <div className="d-flex col content main w-100">
+        <div className="d-flex col content main w-100 h-100">
           <div className="left">
             {!this.state.browse && <Redirect to="/dashboard"></Redirect>}
             <div className="d-flex col"></div>
