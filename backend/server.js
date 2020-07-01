@@ -8,5 +8,13 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../build"));
+}
+
+app.get("/", function (req, res) {
+  res.sendFile("/index.html", { root: __dirname });
+});
+
 const router = require("./routes/router");
-app.use("/", router);
+app.use("/api", router);

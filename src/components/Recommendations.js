@@ -34,7 +34,7 @@ class Recommendations extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/recommendations/?accessToken=${accessToken}&genre=${genre}`,
+      url: `http://localhost:5000/api/recommendations/?accessToken=${accessToken}&genre=${genre}`,
     })
       .then((res) => {
         // console.log(res)
@@ -52,9 +52,10 @@ class Recommendations extends Component {
     console.log(this.state);
     return (
       <div className="mb-7">
-        <h1>Hello</h1>
-        <h5>Popular Genres from your data:</h5>
-        <div>{this.state.results}</div>
+        <h1>Popular Genres from your data:</h1>
+        <div className="d-flex col mb-5 pb-5 flex-wrap align-items-center justify-content-center">
+          {this.state.results}
+        </div>
       </div>
     );
   }

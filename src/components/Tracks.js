@@ -20,7 +20,7 @@ class Tracks extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/toptracks/?accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/toptracks/?accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);

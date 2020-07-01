@@ -56,7 +56,7 @@ class Browse extends Component {
     }
     axios({
       method: "get",
-      url: `http://localhost:5000/search/?q=${
+      url: `http://localhost:5000/api/search/?q=${
         this.state.query
       }&accessToken=${sessionStorage.getItem("accessToken")}&type=${
         this.state.type
@@ -115,7 +115,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/albumtrack/?id=${id}&accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/albumtrack/?id=${id}&accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);
@@ -142,7 +142,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/tracks/?accessToken=${accessToken}&artistId=${id}`,
+      url: `http://localhost:5000/api/tracks/?accessToken=${accessToken}&artistId=${id}`,
     })
       .then((res) => {
         console.log(res);

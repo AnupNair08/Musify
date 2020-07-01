@@ -25,7 +25,7 @@ class Artists extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/artists/?accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/artists/?accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);
@@ -50,7 +50,7 @@ class Artists extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/tracks/?accessToken=${accessToken}&artistId=${id}`,
+      url: `http://localhost:5000/api/tracks/?accessToken=${accessToken}&artistId=${id}`,
     })
       .then((res) => {
         console.log(res);
