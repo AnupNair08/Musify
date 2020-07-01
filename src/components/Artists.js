@@ -134,7 +134,7 @@ class Artists extends Component {
     return (
       <div>
         <ReactNotification />
-        <h1>Checkout your top artists</h1>
+        <h1>Top Artists for you</h1>
         <div className="hscroll">{artists}</div>
         <div>
           <Modal show={this.state.show} onHide={this.toggle}>
