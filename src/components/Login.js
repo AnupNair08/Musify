@@ -12,6 +12,16 @@ class Login extends Component {
       login: false,
     };
   }
+  componentDidMount = () => {
+    const inp = document.getElementById("signin");
+    console.log(inp.children[0]);
+    document.body.addEventListener("keyup", (e) => {
+      e.preventDefault();
+      if (e.keyCode === 13) {
+        inp.children[0].click();
+      }
+    });
+  };
 
   success = (res) => {
     // console.log("Succesfull login");
@@ -39,7 +49,7 @@ class Login extends Component {
           <p className="text-muted">A mini spotify client</p>
           <Image src="https://cdn1.iconfinder.com/data/icons/multimedia-sound-3/32/Analyze-_sound-_wave-music-512.png"></Image>
         </div>
-        <div>
+        <div id="signin">
           <SpotifyLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             redirectUri="http://localhost:3000/login"
@@ -48,6 +58,7 @@ class Login extends Component {
             onFailure={this.failure}
             scope={("user-read-private", "streaming", "user-top-read")}
             className="btn btn-outline-success"
+            id="butt"
           />
         </div>
       </div>
