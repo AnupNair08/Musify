@@ -7,7 +7,6 @@ import "./Artists.css";
 import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-let pd = "";
 class Artists extends Component {
   constructor(props) {
     super(props);

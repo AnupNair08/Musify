@@ -3,7 +3,6 @@ import axios from "axios";
 import { Image } from "react-bootstrap";
 import "./Artists.css";
 import { connect } from "react-redux";
-import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 

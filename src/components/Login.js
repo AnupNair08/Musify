@@ -58,6 +58,7 @@ class Login extends Component {
             height="300px"
             width="410px"
             src="https://i.pinimg.com/originals/56/78/e6/5678e613f65dcb80ea0f441bb392f45d.gif"
+            alt="musify"
           ></img>
         </div>
         <div id="signin">

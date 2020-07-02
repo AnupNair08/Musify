@@ -18,6 +18,7 @@ class Dashboard extends Component {
       token: this.props.accessToken,
       user: "",
       browse: false,
+      playlist: false,
     };
   }
 
@@ -57,6 +58,11 @@ class Dashboard extends Component {
     });
   };
 
+  playlist = () => {
+    this.setState({
+      playlist: true,
+    });
+  };
   render() {
     const status = sessionStorage.getItem("login");
     if (status === "false") {
@@ -67,11 +73,14 @@ class Dashboard extends Component {
         {this.state.browse && (
           <Redirect to="/browse" from="/dashboard"></Redirect>
         )}
+        {this.state.playlist && (
+          <Redirect to="/myplaylist" from="/dashboard"></Redirect>
+        )}
         <Navbar className="navbg" variant="dark" sticky>
           <Navbar.Brand>Musify</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link onClick={this.browse}>Browse</Nav.Link>
-            {/* <Nav.Link href="#features">Features</Nav.Link> */}
+            <Nav.Link onClick={this.playlist}>My Playlists</Nav.Link>
           </Nav>
 
           <Nav className="ml-auto">

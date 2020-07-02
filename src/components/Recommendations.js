@@ -52,7 +52,7 @@ class Recommendations extends Component {
     console.log(this.state);
     return (
       <div className="mb-7">
-        <h1>Popular Genres from your data:</h1>
+        <h1>Popular Genres based on your listening:</h1>
         <div className="d-flex col mb-5 pb-5 flex-wrap align-items-center justify-content-center">
           {this.state.results}
         </div>
