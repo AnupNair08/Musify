@@ -112,12 +112,12 @@ class Artists extends Component {
       const ele = (
         <div
           key={key}
-          className="d-flex row align-content-center justify-content-center"
+          className="d-flex click row align-content-center justify-content-center"
         >
           <div className="rounded-circle gradient">
             <Image
               src={val.images[0].url}
-              className={`artist ${pd}`}
+              className="artist"
               alt={val.name}
               onClick={() => {
                 this.gettracks(val.id);

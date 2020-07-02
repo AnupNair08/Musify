@@ -47,7 +47,7 @@ class Recommender extends Component {
           const ele = (
             <div
               key={key}
-              className="d-flex row align-content-center justify-content-center"
+              className="d-flex row align-content-center click justify-content-center"
               onClick={() => this.getItem(val.id, val.images[0].url)}
             >
               <Image

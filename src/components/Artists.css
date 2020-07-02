@@ -13,3 +13,7 @@
     rgba(26, 2, 65, 0.5) 100%
   );
 }
+
+.click {
+  cursor: pointer;
+}

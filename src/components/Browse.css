@@ -35,3 +35,7 @@ body > #root > div > .bmain {
 .left::-webkit-scrollbar {
   display: none;
 }
+
+.click {
+  cursor: pointer;
+}

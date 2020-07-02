@@ -59,7 +59,7 @@ class Tracks extends Component {
       const ele = (
         <div
           key={key}
-          className="d-flex row align-content-center justify-content-center mx-2"
+          className="d-flex row align-content-center click justify-content-center mx-2"
           onClick={() => this.play(val.preview_url)}
         >
           <Image

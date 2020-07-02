@@ -22,3 +22,7 @@
 .navbg {
   background-color: black;
 }
+
+.click {
+  cursor: pointer;
+}
