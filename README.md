@@ -5,9 +5,13 @@ This is a task for SDS inductions 2020 which is basically a react-based Spotify 
 # To run the project
 ``` 
 1. Clone the repo
-2. To start the backend server => cd backend and run nodemon server.js
-3. To start the frontend server => Run npm start from the root directory.
+2. Run npm install in the root directory
+3. Run npm start and both the backend and frontend servers should fire up.
 ```
 
 # Get Started
-To get started log in via your spotify account. Musify will fetch your preferences and recommend top artists, playlists and albums. 
+To get started log in via your spotify account. Musify will fetch your preferences and recommend top artists, playlists and albums. You can search through and play any track available on spotify.
+
+# Tools
+
+### This project is built with React, Express, Node.js and Redux and many other awesome npm packages.
