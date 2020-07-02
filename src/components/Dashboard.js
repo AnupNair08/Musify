@@ -9,6 +9,7 @@ import Waves from "css-waves/Waves";
 import Recommendations from "./Recommendations";
 import Tracks from "./Tracks";
 import Footer from "./Footer";
+import NewRelease from "./NewRelease";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class Dashboard extends Component {
           <Navbar.Brand>Musify</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link onClick={this.browse}>Browse</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
+            {/* <Nav.Link href="#features">Features</Nav.Link> */}
           </Nav>
 
           <Nav className="ml-auto">
@@ -110,6 +111,10 @@ class Dashboard extends Component {
         </div>
         <div className="p-8">
           {this.props.loaded && <Recommendations></Recommendations>}
+        </div>
+
+        <div className="p-8">
+          <NewRelease />
         </div>
         <div className="p-8">
           <Footer song={this.props.song}></Footer>

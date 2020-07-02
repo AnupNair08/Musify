@@ -45,9 +45,20 @@ class Login extends Component {
         id="login"
       >
         <div className="w-100">
+          <Image
+            height="100px"
+            width="100px"
+            src="https://cdn1.iconfinder.com/data/icons/multimedia-sound-3/32/Analyze-_sound-_wave-music-512.png"
+          ></Image>
           <h1>Musify</h1>
           <p className="text-muted">A mini spotify client</p>
-          <Image src="https://cdn1.iconfinder.com/data/icons/multimedia-sound-3/32/Analyze-_sound-_wave-music-512.png"></Image>
+        </div>
+        <div>
+          <img
+            height="300px"
+            width="410px"
+            src="https://i.pinimg.com/originals/56/78/e6/5678e613f65dcb80ea0f441bb392f45d.gif"
+          ></img>
         </div>
         <div id="signin">
           <SpotifyLogin

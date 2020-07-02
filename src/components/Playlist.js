@@ -79,12 +79,14 @@ class Playlist extends Component {
           <Nav.Item className="mx-auto w-80"></Nav.Item>
         </Navbar>
         <div className="d-flex col">
-          <Image
-            src={this.props.art}
-            height="300px"
-            width="300px"
-            className="left"
-          ></Image>
+          <div className="leftp d-flex align-items-center justify-content-center">
+            <Image
+              src={this.props.art}
+              height="300px"
+              width="300px"
+              // className="left"
+            ></Image>
+          </div>
           <div className="right">
             <h1>{tracks}</h1>
           </div>
@@ -98,6 +100,7 @@ function mapStatetoProps(state) {
   return {
     data: state.data,
     art: state.art,
+    login: state.login,
   };
 }
 
