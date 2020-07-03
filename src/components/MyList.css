@@ -3,7 +3,7 @@ body > #root > div > #list {
   overflow-x: hidden;
   margin-bottom: 80px;
   background-repeat: no-repeat;
-  background-color: rgb(57, 57, 116);
+  background-color: rgb(0, 0, 0);
   background-size: cover;
 }
 

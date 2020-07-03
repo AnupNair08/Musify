@@ -3,10 +3,16 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Artists from "./Artists";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  OverlayTrigger,
+  Image,
+} from "react-bootstrap";
 import Recommender from "./Recommender";
 import Waves from "css-waves/Waves";
-import Recommendations from "./Recommendations";
+import Genre from "./Genre";
 import Tracks from "./Tracks";
 import Footer from "./Footer";
 import NewRelease from "./NewRelease";
@@ -19,6 +25,7 @@ class Dashboard extends Component {
       user: "",
       browse: false,
       playlist: false,
+      style: {},
     };
   }
 
@@ -76,7 +83,7 @@ class Dashboard extends Component {
         {this.state.playlist && (
           <Redirect to="/myplaylist" from="/dashboard"></Redirect>
         )}
-        <Navbar className="navbg" variant="dark" sticky>
+        <Navbar className="navbg fixed-top" variant="dark">
           <Navbar.Brand>Musify</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link onClick={this.browse}>Browse</Nav.Link>
@@ -94,18 +101,32 @@ class Dashboard extends Component {
                 <Nav.Item onClick={this.handleLogout}>Logout</Nav.Item>
               </NavDropdown.Item>
             </NavDropdown>
-            <img
-              src={this.state.profile}
-              alt="user"
-              height="40px"
-              width="40px"
-              className="rounded-circle"
-            ></img>
+            <OverlayTrigger
+              trigger="click"
+              key="profile"
+              placement="bottom"
+              overlay={
+                <Image
+                  src={this.state.profile}
+                  className="rounded-circle profile"
+                  height="300px"
+                  width="300px"
+                ></Image>
+              }
+            >
+              <img
+                src={this.state.profile}
+                alt="user"
+                height="40px"
+                width="40px"
+                className="rounded-circle profile"
+              ></img>
+            </OverlayTrigger>
           </Nav>
         </Navbar>
         <div className="welcome mb-8">
-          <h1>Welcome {this.state.user}</h1>
-          <div>
+          <h1 className="wtext">Welcome {this.state.user}</h1>
+          <div className="wave">
             <Waves backGroundColor="#000" />
           </div>
         </div>
@@ -118,9 +139,7 @@ class Dashboard extends Component {
         <div className="p-8">
           <Tracks></Tracks>
         </div>
-        <div className="p-8">
-          {this.props.loaded && <Recommendations></Recommendations>}
-        </div>
+        <div className="p-8">{this.props.loaded && <Genre></Genre>}</div>
 
         <div className="p-8">
           <NewRelease />

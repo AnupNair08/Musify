@@ -2,7 +2,6 @@
   border-radius: 50%;
   height: 300px;
   width: 300px;
-  z-index: 0;
 }
 
 .gradient {
@@ -12,6 +11,19 @@
     rgba(25, 180, 252, 0.2) 0%,
     rgba(26, 2, 65, 0.5) 100%
   );
+
+  position: relative;
+}
+
+.box {
+  background-color: white;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
 }
 
 .click {

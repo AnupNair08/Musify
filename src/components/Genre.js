@@ -16,7 +16,7 @@ class Recommendations extends Component {
     let g = Array.from(this.props.genre);
     const results = g.map((val, key) => {
       const ele = (
-        <div key={key} className="text-dark">
+        <div key={key} id={"g" + key} className="text-dark">
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>{val}</Card.Title>
