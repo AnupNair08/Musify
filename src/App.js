@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
-import Browse from "./components/Browse";
+import Login from "./components/Login/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Browse from "./components/Search/Browse";
+import Playlist from "./components/PlayList/Playlist";
+import MyList from "./components/UserPlaylist/MyList";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Playlist from "./components/Playlist";
-import MyList from "./components/MyList";
 
 class App extends Component {
   render() {

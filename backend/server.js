@@ -16,5 +16,13 @@ app.get("/", function (req, res) {
   res.sendFile("/index.html", { root: __dirname });
 });
 
-const router = require("./routes/router");
-app.use("/api", router);
+const merouter = require("./routes/me");
+const dashrouter = require("./routes/dashboard");
+const searchrouter = require("./routes/search");
+
+app.use("/api/me", merouter);
+app.use("/api/search", searchrouter);
+app.use("/api/dashboard", dashrouter);
+
+// const router = require("./routes/router");
+// app.use("/api", router);

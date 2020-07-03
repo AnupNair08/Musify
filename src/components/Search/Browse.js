@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import "./Browse.css";
-import "./Artists.css";
 import {
   InputGroup,
   FormControl,
@@ -18,7 +17,7 @@ import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
-import Footer from "./Footer";
+import Footer from "../Player/Footer";
 class Browse extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +55,7 @@ class Browse extends Component {
     }
     axios({
       method: "get",
-      url: `http://localhost:5000/api/search/?q=${
+      url: `http://localhost:5000/api/search/searchquery/?q=${
         this.state.query
       }&accessToken=${sessionStorage.getItem("accessToken")}&type=${
         this.state.type
@@ -115,7 +114,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/albumtrack/?id=${id}&accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/search/albumtrack/?id=${id}&accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);
@@ -156,7 +155,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/tracks/?accessToken=${accessToken}&artistId=${id}`,
+      url: `http://localhost:5000/api/me/tracks/?accessToken=${accessToken}&artistId=${id}`,
     })
       .then((res) => {
         console.log(res);

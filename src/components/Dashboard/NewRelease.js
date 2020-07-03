@@ -17,7 +17,7 @@ class NewRelease extends Component {
   getresult = (val) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/albumtrack/?accessToken=${sessionStorage.getItem(
+      url: `http://localhost:5000/api/search/albumtrack/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}&id=${val.id}`,
     })
@@ -40,7 +40,7 @@ class NewRelease extends Component {
 
     axios({
       method: "get",
-      url: `http://localhost:5000/api/newreleases/?accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/dashboard/newreleases/?accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);

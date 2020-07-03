@@ -14,7 +14,7 @@ import Recommender from "./Recommender";
 import Waves from "css-waves/Waves";
 import Genre from "./Genre";
 import Tracks from "./Tracks";
-import Footer from "./Footer";
+import Footer from "../Player/Footer";
 import NewRelease from "./NewRelease";
 
 class Dashboard extends Component {

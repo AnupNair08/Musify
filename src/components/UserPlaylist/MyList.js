@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Navbar, Nav, Image, Modal, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import Footer from "./Footer";
+import Footer from "../Player/Footer";
 import "./MyList.css";
 
 class MyList extends Component {
@@ -38,7 +38,7 @@ class MyList extends Component {
   gettracks = (id, name) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/playlist/?accessToken=${sessionStorage.getItem(
+      url: `http://localhost:5000/api/dashboard/playlist/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}&id=${id}`,
     })
@@ -70,7 +70,7 @@ class MyList extends Component {
   componentDidMount = () => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/myplaylists/?accessToken=${sessionStorage.getItem(
+      url: `http://localhost:5000/api/me/myplaylists/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}`,
     })

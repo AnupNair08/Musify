@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Navbar, Nav, Image, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../Player/Footer";
 import "./Playlist.css";
 import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
