@@ -6,6 +6,3 @@ body > #root > div > #login {
   flex-direction: column;
   overflow-x: hidden;
 }
-
-.button {
-}
