@@ -5,46 +5,31 @@ import "./Artists.css";
 import { connect } from "react-redux";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class NewRelease extends Component {
   constructor() {
     super();
     this.state = {
       data: <div></div>,
+      cdata: [],
+      offset: 20,
     };
   }
 
-  getresult = (val) => {
-    axios({
-      method: "get",
-      url: `http://localhost:5000/api/search/albumtrack/?accessToken=${sessionStorage.getItem(
-        "accessToken"
-      )}&id=${val.id}`,
-    })
-      .then((res) => {
-        console.log(res);
-        const uri = res.data.items[0].preview_url;
-        if (uri === null) {
-          alert("No preview link");
-
-          return;
-        }
-        this.props.setsong(uri);
-      })
-      .catch((err) => console.log(err));
-
-    return;
-  };
-  componentDidMount = () => {
+  getdata = (offset = 0) => {
     const accessToken = sessionStorage.getItem("accessToken");
-
     axios({
       method: "get",
-      url: `http://localhost:5000/api/dashboard/newreleases/?accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/dashboard/newreleases/?accessToken=${accessToken}&offset=${offset}`,
     })
       .then((res) => {
         console.log(res);
-        const data = res.data.albums.items.map((val, key) => {
+        this.setState({
+          cdata: this.state.cdata.concat(res.data.albums.items),
+          offset: this.state.offset + 20,
+        });
+        const data = this.state.cdata.map((val, key) => {
           const ele =
             val.album_type === "single" ? (
               <div
@@ -72,11 +57,44 @@ class NewRelease extends Component {
       .catch((err) => console.log(err));
   };
 
+  getresult = (val) => {
+    axios({
+      method: "get",
+      url: `http://localhost:5000/api/search/albumtrack/?accessToken=${sessionStorage.getItem(
+        "accessToken"
+      )}&id=${val.id}`,
+    })
+      .then((res) => {
+        console.log(res);
+        const uri = res.data.items[0].preview_url;
+        if (uri === null) {
+          alert("No preview link");
+
+          return;
+        }
+        this.props.setsong(uri);
+      })
+      .catch((err) => console.log(err));
+
+    return;
+  };
+  componentDidMount = () => {
+    this.getdata();
+  };
+
   render() {
     return (
       <div className="text-light">
         <h1>New Releases</h1>
-        <div className="hscroll">{this.state.data}</div>
+        <InfiniteScroll
+          hasMore={true}
+          dataLength={this.state.cdata.length}
+          next={() => this.getdata(this.state.offset)}
+          scrollableTarget={"newrel"}
+        >
+          <div className="hscroll">{this.state.data}</div>
+        </InfiniteScroll>
+
         <ReactNotification />
       </div>
     );

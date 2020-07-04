@@ -5,13 +5,13 @@ const fetch = require("node-fetch");
 //New releases
 router.get("/newreleases", async (req, res) => {
   const accessToken = req.query.accessToken;
-
+  const offset = req.query.offset;
   console.log(req.query);
   const headers = {
     Authorization: "Bearer " + accessToken,
   };
   let result = await fetch(
-    `https://api.spotify.com/v1/browse/new-releases?country=IN`,
+    `https://api.spotify.com/v1/browse/new-releases?country=IN&offset=${offset}`,
     {
       method: "GET",
       headers: headers,
