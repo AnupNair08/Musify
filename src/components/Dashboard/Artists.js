@@ -75,6 +75,7 @@ class Artists extends Component {
   };
   play = (url) => {
     if (!url) {
+      alert("No preview link");
       store.addNotification({
         title: "No Preview",
         message: "Preview link not found",
@@ -113,18 +114,19 @@ class Artists extends Component {
           key={key}
           className="d-flex click row align-content-center justify-content-center"
         >
-          <div className="rounded-circle gradient">
+          <div className="rounded-circle mt-5 gradient view overlay zoom">
             <Image
               src={val.images[0].url}
               className="artist"
               alt={val.name}
+              id={"a" + key}
               onClick={() => {
                 this.gettracks(val.id);
                 this.toggle(val);
               }}
             ></Image>
           </div>
-          <h3>{val.name}</h3>
+          <h3 className="mt-5">{val.name}</h3>
         </div>
       );
       return ele;
@@ -132,7 +134,6 @@ class Artists extends Component {
 
     return (
       <div>
-        <ReactNotification />
         <h1>Top Artists for you</h1>
         <div className="hscroll">{artists}</div>
         <div>

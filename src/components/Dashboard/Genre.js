@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Card } from "react-bootstrap";
+import "./Genre.css";
 
 class Recommendations extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class Recommendations extends Component {
       results: <div> </div>,
     };
   }
+
   componentDidMount = () => {
     console.log(this.props.genre);
     let g = Array.from(this.props.genre);

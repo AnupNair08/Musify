@@ -26,6 +26,14 @@
   padding-right: 30px;
 }
 
+.leftp::-webkit-scrollbar {
+  display: none;
+}
+
+.right::-webkit-scrollbar {
+  display: none;
+}
+
 .wrapper {
   background-color: cornsilk;
 }
