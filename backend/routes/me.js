@@ -13,7 +13,7 @@ router.get("/topartists", async (req, res) => {
     method: "GET",
     headers: headers,
   });
-  console.log(result);
+  // console.log(result);
   const f = await result.json();
   res.json(f);
 });
@@ -40,15 +40,19 @@ router.get("/tracks", async (req, res) => {
 //Top tracks on Dashboard
 router.get("/toptracks", async (req, res) => {
   const accessToken = req.query.accessToken;
-  console.log(accessToken);
+  const offset = req.query.offset ? req.query.offset : 0;
+  console.log(offset);
   const headers = {
     Authorization: "Bearer " + accessToken,
   };
-  let result = await fetch("https://api.spotify.com/v1/me/top/tracks", {
-    method: "GET",
-    headers: headers,
-  });
-  console.log(result);
+  let result = await fetch(
+    `https://api.spotify.com/v1/me/top/tracks?offset=${offset}`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+  // console.log(result);
   const f = await result.json();
   res.json(f);
 });

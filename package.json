@@ -23,6 +23,7 @@
     "react-dom": "^16.13.1",
     "react-h5-audio-player": "^3.2.0",
     "react-iframe": "^1.8.0",
+    "react-infinite-scroll-component": "^5.0.5",
     "react-jinke-music-player": "^4.15.3",
     "react-notification-component": "^1.1.4",
     "react-notifications-component": "^2.4.0",

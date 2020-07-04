@@ -6,6 +6,7 @@ import { store } from "react-notifications-component";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { connect } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class Tracks extends Component {
   constructor(props) {
@@ -13,22 +14,28 @@ class Tracks extends Component {
     this.state = {
       data: [],
       song: "",
+      offset: 20,
     };
   }
 
-  componentDidMount = () => {
+  getdata = (offset = 0) => {
+    if (offset === null) return;
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/me/toptracks/?accessToken=${accessToken}`,
+      url: `http://localhost:5000/api/me/toptracks/?accessToken=${accessToken}&offset=${offset}`,
     })
       .then((res) => {
         console.log(res);
         this.setState({
-          data: res.data.items,
+          data: this.state.data.concat(res.data.items),
+          offset: this.state.offset + 20 > 50 ? 50 : this.state.offset + 20,
         });
       })
       .catch((err) => console.log(err));
+  };
+  componentDidMount = () => {
+    this.getdata();
   };
 
   play = (url) => {
@@ -76,7 +83,16 @@ class Tracks extends Component {
       <div>
         <ReactNotification />
         <h1>Top Tracks for you</h1>
-        <div className="hscroll">{tracks}</div>
+        <InfiniteScroll
+          dataLength={this.state.data.length}
+          hasMore={true}
+          next={() => this.getdata(this.state.offset)}
+          scrollableTarget="trackdiv"
+          scrollThreshold={1.0}
+        />
+        <div className="hscroll" id="trackdiv">
+          {tracks}
+        </div>
       </div>
     );
   }
