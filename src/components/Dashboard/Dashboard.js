@@ -50,13 +50,13 @@ class Dashboard extends Component {
   };
 
   handleLogout = () => {
-    sessionStorage.setItem("login", "false");
     sessionStorage.setItem("accessToken", "");
-    this.props.setAcessToken("");
-    this.props.setlogin(false);
+    sessionStorage.setItem("login", "false");
     this.setState({
       user: "",
     });
+    this.props.setAcessToken("");
+    this.props.setlogin(false);
   };
 
   browse = () => {
