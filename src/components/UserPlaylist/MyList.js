@@ -111,6 +111,7 @@ class MyList extends Component {
   render() {
     return (
       <div className="text-light" id="list">
+        {!sessionStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
         <Navbar bg="dark">
           <Nav.Link className="text-light" onClick={this.handleRequest}>
             Back

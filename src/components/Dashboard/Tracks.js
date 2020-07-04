@@ -40,6 +40,7 @@ class Tracks extends Component {
 
   play = (url) => {
     if (!url) {
+      alert("No Preview link");
       store.addNotification({
         title: "No Preview",
         message: "Preview link not found",

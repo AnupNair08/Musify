@@ -69,6 +69,7 @@ class Playlist extends Component {
     return (
       <div className="text-light">
         <ReactNotification />
+        {!sessionStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
         {!this.state.featured && (
           <Redirect to="/dashboard" from="/featured"></Redirect>
         )}

@@ -260,6 +260,7 @@ class Browse extends Component {
 
     return (
       <div className="d-flex row text-light thide">
+        {!sessionStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
         <ReactNotification />
         <div className="w-100">
           <Navbar bg="dark">
