@@ -155,7 +155,7 @@ class Artists extends Component {
                     return (
                       <div
                         key={key}
-                        className="d-flex col mb-3"
+                        className="d-flex col mb-3 click"
                         onClick={() => this.play(val.preview_url)}
                       >
                         <img
