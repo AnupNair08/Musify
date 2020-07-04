@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/", function (req, res) {
-  res.sendFile("/build/index.html", { root: __dirname });
+  res.sendFile("../build/index.html");
 });
 
 const merouter = require("./routes/me");
