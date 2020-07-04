@@ -36,7 +36,7 @@ class Recommendations extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/me/genre/?accessToken=${accessToken}&genre=${genre}`,
+      url: `https://musifyback.herokuapp.com/api/me/genre/?accessToken=${accessToken}&genre=${genre}`,
     })
       .then((res) => {
         // console.log(res)

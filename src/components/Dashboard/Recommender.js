@@ -23,7 +23,7 @@ class Recommender extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/dashboard/playlist/?accessToken=${accessToken}&id=${id}`,
+      url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${accessToken}&id=${id}`,
     })
       .then((res) => {
         console.log(res);
@@ -39,7 +39,7 @@ class Recommender extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/dashboard/featured/?accessToken=${accessToken}`,
+      url: `https://musifyback.herokuapp.com/api/dashboard/featured/?accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);

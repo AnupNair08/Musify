@@ -21,7 +21,7 @@ class NewRelease extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/dashboard/newreleases/?accessToken=${accessToken}&offset=${offset}`,
+      url: `https://musifyback.herokuapp.com/api/dashboard/newreleases/?accessToken=${accessToken}&offset=${offset}`,
     })
       .then((res) => {
         console.log(res);
@@ -60,7 +60,7 @@ class NewRelease extends Component {
   getresult = (val) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/search/albumtrack/?accessToken=${sessionStorage.getItem(
+      url: `https://musifyback.herokuapp.com/api/search/albumtrack/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}&id=${val.id}`,
     })

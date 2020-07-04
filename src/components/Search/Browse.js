@@ -55,7 +55,7 @@ class Browse extends Component {
     }
     axios({
       method: "get",
-      url: `http://localhost:5000/api/search/searchquery/?q=${
+      url: `https://musifyback.herokuapp.com/api/search/searchquery/?q=${
         this.state.query
       }&accessToken=${sessionStorage.getItem("accessToken")}&type=${
         this.state.type
@@ -114,7 +114,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/search/albumtrack/?id=${id}&accessToken=${accessToken}`,
+      url: `https://musifyback.herokuapp.com/api/search/albumtrack/?id=${id}&accessToken=${accessToken}`,
     })
       .then((res) => {
         console.log(res);
@@ -155,7 +155,7 @@ class Browse extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/me/tracks/?accessToken=${accessToken}&artistId=${id}`,
+      url: `https://musifyback.herokuapp.com/api/me/tracks/?accessToken=${accessToken}&artistId=${id}`,
     })
       .then((res) => {
         console.log(res);

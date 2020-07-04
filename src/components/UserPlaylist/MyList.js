@@ -38,7 +38,7 @@ class MyList extends Component {
   gettracks = (id, name) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/dashboard/playlist/?accessToken=${sessionStorage.getItem(
+      url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}&id=${id}`,
     })
@@ -70,7 +70,7 @@ class MyList extends Component {
   componentDidMount = () => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/me/myplaylists/?accessToken=${sessionStorage.getItem(
+      url: `https://musifyback.herokuapp.com/api/me/myplaylists/?accessToken=${sessionStorage.getItem(
         "accessToken"
       )}`,
     })

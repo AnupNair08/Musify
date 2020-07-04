@@ -23,7 +23,7 @@ class Tracks extends Component {
     const accessToken = sessionStorage.getItem("accessToken");
     axios({
       method: "get",
-      url: `http://localhost:5000/api/me/toptracks/?accessToken=${accessToken}&offset=${offset}`,
+      url: `https://musifyback.herokuapp.com5000/api/me/toptracks/?accessToken=${accessToken}&offset=${offset}`,
     })
       .then((res) => {
         console.log(res);
