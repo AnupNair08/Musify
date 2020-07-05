@@ -1,8 +1,30 @@
-# Musify: A mini spotify client
+<p align="center">
+  <a href="https://github.com/AnupNair08/Musify">
+    <img src="assets/logo192.png" alt="Logo" width="80" height="80">
+    
+  </a>
 
-This is a task for SDS Inductions 2020 and is a React based Spotify client that uses the Spotify Web API to make recommendations and get user preferances. Web playback with Spotify Web Player SDK works only on Premium accounts ;). So this player will only let you stream preview urls. Musify displays top artists, tracks and albums for a user.
+  <h3 align="center">Musify: A mini spotify client</h3>
 
-# To run the project
+  <p align="center">
+    Musify is a React based PWA that lets you authenticate and use Spotify services
+    <br />
+    <a href="https://github.com/AnupNair08/Musify"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://musifytask.herokuapp.com">View Demo</a>
+    ·
+    <a href="https://github.com/AnupNair08/Musify/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/AnupNair08/Musify/issues">Request Feature</a>
+  </p>
+</p>
+
+This is a task for SDS Inductions 2020 and is a React based Spotify client that uses the Spotify Web API to make recommendations and get user preferances. Web playback with Spotify Web Player SDK works only on Premium accounts ;). So this player will only let you stream preview urls. Musify displays top artists, tracks and albums for a user. Added that this is a PWA, Musify is a cross-platform app that works on mobile and desktop devices.
+
+  
+
+# Installing
 ``` 
 1. Clone the repo
 2. Run npm install in the root directory
