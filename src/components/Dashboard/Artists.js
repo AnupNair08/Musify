@@ -21,7 +21,7 @@ class Artists extends Component {
   }
 
   componentDidMount = () => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/me/topartists/?accessToken=${accessToken}`,
@@ -46,7 +46,7 @@ class Artists extends Component {
   };
 
   gettracks = (id) => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/me/tracks/?accessToken=${accessToken}&artistId=${id}`,

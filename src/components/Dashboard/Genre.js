@@ -33,7 +33,7 @@ class Recommendations extends Component {
     });
   };
   getGenre = (genre) => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/me/genre/?accessToken=${accessToken}&genre=${genre}`,

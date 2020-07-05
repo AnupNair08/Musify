@@ -30,7 +30,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount = () => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: "https://api.spotify.com/v1/me/",
@@ -50,8 +50,8 @@ class Dashboard extends Component {
   };
 
   handleLogout = () => {
-    sessionStorage.setItem("accessToken", "");
-    sessionStorage.setItem("login", "false");
+    localStorage.setItem("accessToken", "");
+    localStorage.setItem("login", "false");
     this.setState({
       user: "",
     });
@@ -71,7 +71,7 @@ class Dashboard extends Component {
     });
   };
   render() {
-    const status = sessionStorage.getItem("login");
+    const status = localStorage.getItem("login");
     if (status === "false") {
       return <Redirect to="/"></Redirect>;
     }

@@ -38,7 +38,7 @@ class MyList extends Component {
   gettracks = (id, name) => {
     axios({
       method: "get",
-      url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${sessionStorage.getItem(
+      url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${localStorage.getItem(
         "accessToken"
       )}&id=${id}`,
     })
@@ -70,7 +70,7 @@ class MyList extends Component {
   componentDidMount = () => {
     axios({
       method: "get",
-      url: `https://musifyback.herokuapp.com/api/me/myplaylists/?accessToken=${sessionStorage.getItem(
+      url: `https://musifyback.herokuapp.com/api/me/myplaylists/?accessToken=${localStorage.getItem(
         "accessToken"
       )}`,
     })
@@ -111,7 +111,7 @@ class MyList extends Component {
   render() {
     return (
       <div className="text-light" id="list">
-        {!sessionStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
+        {!localStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
         <Navbar bg="dark">
           <Nav.Link className="text-light" onClick={this.handleRequest}>
             Back

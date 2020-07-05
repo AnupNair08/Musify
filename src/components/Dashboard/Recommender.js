@@ -20,7 +20,7 @@ class Recommender extends Component {
   };
 
   getItem = (id, art) => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${accessToken}&id=${id}`,
@@ -36,7 +36,7 @@ class Recommender extends Component {
   };
 
   componentDidMount = () => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/dashboard/featured/?accessToken=${accessToken}`,

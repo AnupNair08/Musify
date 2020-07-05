@@ -57,7 +57,7 @@ class Browse extends Component {
       method: "get",
       url: `https://musifyback.herokuapp.com/api/search/searchquery/?q=${
         this.state.query
-      }&accessToken=${sessionStorage.getItem("accessToken")}&type=${
+      }&accessToken=${localStorage.getItem("accessToken")}&type=${
         this.state.type
       }`,
     })
@@ -111,7 +111,7 @@ class Browse extends Component {
   };
 
   getItem = (id, art) => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/search/albumtrack/?id=${id}&accessToken=${accessToken}`,
@@ -152,7 +152,7 @@ class Browse extends Component {
   };
 
   getartist = (id, art) => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/me/tracks/?accessToken=${accessToken}&artistId=${id}`,
@@ -260,7 +260,7 @@ class Browse extends Component {
 
     return (
       <div className="d-flex row text-light thide">
-        {!sessionStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
+        {!localStorage.getItem("accessToken") && <Redirect to="/"></Redirect>}
         <ReactNotification />
         <div className="w-100">
           <Navbar bg="dark">

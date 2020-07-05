@@ -29,8 +29,8 @@ class Login extends Component {
       accessToken: res.access_token,
       login: true,
     });
-    sessionStorage.setItem("login", "true");
-    sessionStorage.setItem("accessToken", this.state.accessToken);
+    localStorage.setItem("login", "true");
+    localStorage.setItem("accessToken", this.state.accessToken);
 
     this.props.setAcessToken(this.state.accessToken);
     this.props.setlogin(true);
