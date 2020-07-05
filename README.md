@@ -1,6 +1,6 @@
 # Musify: A mini spotify client
 
-This is a task for SDS inductions 2020 which is basically a react-based Spotify client that uses the Spotify Web API to make recommendations and get user preferances. Web playback with Spotify Web Player SDK works only on Premium accounts ;). So this player will only let you stream preview urls.
+This is a task for SDS Inductions 2020 and is a React based Spotify client that uses the Spotify Web API to make recommendations and get user preferances. Web playback with Spotify Web Player SDK works only on Premium accounts ;). So this player will only let you stream preview urls. Musify displays top artists, tracks and albums for a user.
 
 # To run the project
 ``` 
@@ -14,4 +14,10 @@ To get started log in via your spotify account. Musify will fetch your preferenc
 
 # Tools
 
-### This project is built with React, Express, Node.js and Redux and many other awesome npm packages.
+### This project is built with React, Express, Node.js, Redux and many other awesome npm packages.
+### Find it live on: https://musifytask.herokuapp.com
+#### The live project has some bugs for the mobile versions. Feel free to open an issue regarding any bugs. Pull requests are also welcome.
+
+# References
+1. https://developer.spotify.com/documentation/web-api/
+2. https://developer.spotify.com/documentation/general/guides/authorization-guide/
