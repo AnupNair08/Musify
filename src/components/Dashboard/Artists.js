@@ -5,7 +5,6 @@ import { Image, Modal, Button } from "react-bootstrap";
 import "./Dashboard.css";
 import "./Artists.css";
 import { store } from "react-notifications-component";
-import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 class Artists extends Component {
   constructor(props) {
@@ -17,11 +16,15 @@ class Artists extends Component {
       cur: {},
       tracks: [],
       song: "",
+      loading: false,
     };
   }
 
   componentDidMount = () => {
     const accessToken = localStorage.getItem("accessToken");
+    this.setState({
+      loading: true,
+    });
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/me/topartists/?accessToken=${accessToken}`,
@@ -40,6 +43,9 @@ class Artists extends Component {
         const s = new Set(genres);
         this.props.setgenre(s);
         this.props.setloaded(true);
+        this.setState({
+          loading: false,
+        });
       })
       .catch((err) => console.log(err));
     // this.getArtisits();
@@ -137,6 +143,9 @@ class Artists extends Component {
         <h1>Top Artists for you</h1>
         <div className="hscroll">{artists}</div>
         <div>
+          <div>
+            {this.state.loading && <h1 className="text-light">Loading....</h1>}
+          </div>
           <Modal show={this.state.show} onHide={this.toggle}>
             <Modal.Header closeButton className="bg-dark text-light">
               <Modal.Title className="mx-auto display-4">

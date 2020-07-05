@@ -13,6 +13,7 @@ class Recommender extends Component {
       history: [],
       result: <h1> </h1>,
       move: false,
+      loading: false,
     };
   }
   componentDidUpdate = () => {
@@ -21,6 +22,9 @@ class Recommender extends Component {
 
   getItem = (id, art) => {
     const accessToken = localStorage.getItem("accessToken");
+    this.setState({
+      loading: true,
+    });
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/dashboard/playlist/?accessToken=${accessToken}&id=${id}`,
@@ -30,6 +34,7 @@ class Recommender extends Component {
         this.props.setdata(res.data.items, art);
         this.setState({
           move: true,
+          loading: false,
         });
       })
       .catch((err) => console.log(err));
@@ -37,6 +42,7 @@ class Recommender extends Component {
 
   componentDidMount = () => {
     const accessToken = localStorage.getItem("accessToken");
+    this.setState({ loading: true });
     axios({
       method: "get",
       url: `https://musifyback.herokuapp.com/api/dashboard/featured/?accessToken=${accessToken}`,
@@ -60,6 +66,7 @@ class Recommender extends Component {
           );
           return ele;
         });
+        this.setState({ loading: false });
         ReactDOM.render(result, document.getElementById("featured"));
       })
       .catch((err) => console.log(err));
@@ -71,6 +78,7 @@ class Recommender extends Component {
     return (
       <div>
         <h1>Featured playlists for you</h1>
+        {this.state.loading && <h1>Loading...</h1>}
         <div className="hscroll" id="featured"></div>
       </div>
     );
