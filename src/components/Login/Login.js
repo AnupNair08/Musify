@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SpotifyLogin from "react-spotify-login";
+import SpotifyLogin from "./react-spotify-login/src";
 import { connect } from "react-redux";
 import "./Login.css";
 import { Image } from "react-bootstrap";
