@@ -64,8 +64,8 @@ class Login extends Component {
         <div id="signin">
           <SpotifyLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
-            // redirectUri="http://localhost:3000/login"
-            redirectUri="https://musifytask.herokuapp.com/"
+            redirectUri="http://localhost:3000/login"
+            // redirectUri="https://musifytask.herokuapp.com/"
             onSuccess={this.success}
             onFailure={this.failure}
             scope={("user-read-private", "streaming", "user-top-read")}
